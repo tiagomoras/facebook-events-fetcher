@@ -1,0 +1,112 @@
+body{
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+form{
+  width: 40%;
+  height: auto;
+  margin: 5em auto;
+  padding: 1em;
+  background: rgba(255, 255, 255, 0.1);
+  text-align: left;
+  border-radius: 3px;
+  border: 1px solid #DFDCDC;
+}
+input[type="button"], #submit{
+  margin-left: 2em;
+  padding: .9em 1.2em;
+  cursor: pointer;
+  border: 0px;
+  background: rgba(0, 0, 0, 0);
+  margin: 0;
+  display: inline-block;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #FFF;
+  line-height: 1;
+  font-size: .8em;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: rgba(255, 255, 255, 0.2) 0 1px 0 inset,rgba(0, 0, 0, 0.1) 0 1px 3px;
+  -moz-box-shadow: rgba(255,255,255,0.2) 0 1px 0 inset,rgba(0,0,0,0.1) 0 1px 3px;
+  box-shadow: rgba(255, 255, 255, 0.2) 0 1px 0 inset,rgba(0, 0, 0, 0.1) 0 1px 3px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  -webkit-transition: 0.5s cubic-bezier(0.09, 0.68, 0, 0.99);
+  -moz-transition: 0.5s cubic-bezier(0.09, 0.68, 0, 0.99);
+  -o-transition: 0.5s cubic-bezier(0.09, 0.68, 0, 0.99);
+  transition: 0.5s cubic-bezier(0.09, 0.68, 0, 0.99);
+}
+input[type="button"].green, #submit.green{
+  background-color: #B6DA29;
+  display: inline-block;
+  margin-left: 1em;
+}
+label{
+  width: 160px;
+  display: inline-block;
+  text-align: left;
+  font-size: 1.2em;
+  vertical-align: middle;
+   color: #BBB;
+}
+input[type="text"]{
+  width: 65%;
+  padding: .8em;
+  border-radius: 3px;
+  outline: 0;
+  border: 1px solid #DFDCDC;
+  margin: 1.5em 0;
+  vertical-align: middle;
+  color: #868585;
+}
+#fetch{
+  width: 50%;
+  margin: 2em auto -4em auto;
+}
+#fetch_event{
+  width: 40%;
+}
+textarea{
+  padding: 1em;
+  width: 64.5%;
+  display: inline-block;
+  border: 1px solid #DFDCDC;
+  border-radius: 3px;
+  overflow: auto;
+  outline: 0;
+  resize: none;
+  color: #868585;
+}
+form label{
+  margin-right: .2em;
+}
+#cover_img{
+  width: 50%;
+  height: 250px;
+  border-radius: 3px;
+  margin-bottom: 1em;
+  display: block;
+  margin-left: 10.2em;
+  border: 1px solid #DFDCDC;
+}
+
+#submit{
+  padding: 1.3em 2em;
+}
+
+.center{text-align: center;}
+
+/* error messages */
+.error{
+  border: 1px solid red !important;
+}
+.error::-webkit-input-placeholder{
+  color: red;
+}
