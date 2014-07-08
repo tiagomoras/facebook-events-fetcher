@@ -1,8 +1,8 @@
-function fetchEvent() {
+function FetchEvent() {
 
     var Event_url = $("#fetch_event").val(),
-              accessToken = "CAACEdEose0cBAFxXUNl0KAWqax6pabRbD4ZCOo2VGwoJtKAI9fGYcI1QJUpuuTiizL5peB17DSPIVZC0L7rNBs5TQxPJ2ZANjRS2QLWzmf8SPdqwEP5oSzZChkfLEMayWmDgYbP09RfUterRIwLqJFYbH2gWOAAwNtKYtjyQZBIL3OS7M6AX9g0UEViu1JDLZB7ws86g4uOwZDZD",
-              regex = /(?:(?:http|https):\/\/)?(?:www.)?facebook.com\/\w+\/\d+/g;
+              accessToken = "CAACEdEose0cBAHIN2f3NgZBdgFHHfQLQWnPKZBP0fqXWcmjmbtHunvXKdpsLHBIBDbd2wAe6AOOLOmhPZAZB5Br1IpFiKiYrAdLs2zZBSBTQMW73BMV1lDOcAUMgDvAck9sQmtBpl0Cs2czJjYRexFXoiASO3pHGN6XJIV8l6wEYkQegW1FtJIJNeZB2CZA9EBST5aRmLwLyQZDZD",
+              regex = /(?:(?:http|https):\/\/)?(?:www.)?facebook.com|fb.com\/\w+\/\d+/g;
 
     // Checks if it is a valid facebook event page
     if(Event_url.match(regex))
@@ -19,32 +19,28 @@ function fetchEvent() {
 
       function getTicketUrl()
       {
-          $.ajax({
-            url: FbTicketUrl,
-            method: 'GET',
-            dataType: "json",
-            success: function(data)
-            {
-              //console.dir(data);
+        $.ajax({
+          url: FbTicketUrl,
+          method: 'GET',
+          dataType: "json",
+          success: function(data)
+          {
+            ticket_url = data.ticket_uri;
 
-              $ticket_url = data.ticket_uri;
-
-              if(typeof $ticket_url === 'undefined')
-              {
-                console.log("no ticket url available");
-              }
-              else
-              {
-                $("#ticket_url").attr("href", $ticket_url);
-                $("#ticket").val($ticket_url);
-              }
-            },
-            error: function(status)
+            if(ticket_url)
             {
-              console.log("Can't Display Ticket url <br> Error: " + status);
+              $("#ticket").val(ticket_url);
             }
-          });
-
+            else
+            {
+              console.log("no ticket url available");
+            }
+          },
+          error: function(status)
+          {
+            console.log("Can't Display Ticket url <br> Error: " + status);
+          }
+        });
       }
 
       function getCoverImage()
@@ -55,18 +51,15 @@ function fetchEvent() {
           dataType: "json",
           success: function(data)
           {
-            //console.dir(data);
+            cover = data.cover;
 
-            $cover = data.cover;
-
-            if(typeof $cover.source === 'undefined')
+            if(cover.source)
             {
-              console.log("no Flyer available");
+              $("#cover_img").attr("src", cover.source);
             }
             else
             {
-              $coverImg = $cover.source;
-              $("#cover_img").attr("src", $coverImg);
+              console.log("no Flyer available");
             }
           },
           error: function(status)
@@ -83,58 +76,56 @@ function fetchEvent() {
           dataType: "json",
           success: function(data)
           {
-              //console.dir(data);
 
-              $results = data;
+            console.dir(data);
 
-              if(typeof $results.name === 'undefined')
-              {
-                console.log($results.name + "is not available");
-              }
-              else{
-                $("#name").val($results.name);
-              }
+            _.each(_.keys(data), function(field) {
 
-              if(typeof $results.description === 'undefined')
-              {
-                console.log($results.description + "is not available");
-              }
-              else{
-                $("#description").val($results.description);
+              $field = $("[data-field='" + field + "']");
+
+              if(data[field] !== null){
+                $field.val(data[field]);
+              } else {
+                console.log(field + " not available");
               }
 
-              if(typeof $results.start_time === 'undefined')
-              {
-                console.log($results.start_time + "is not available");
-              }
-              else{
-                $("#start_time").val($results.start_time);
-              }
+            });
 
-              if(typeof $results.location === 'undefined')
-              {
-                console.log($results.location + "is not available");
-              }
-              else{
-                $("#location").val($results.venue.street + " " + $results.venue.zip + ", " + $results.venue.city + ", " + $results.venue.country);
-              }
+            //Image Display
+            getCoverImage();
 
-
-              //Image Display
-              getCoverImage();
-
-              // Get tickets url
-              getTicketUrl();
+            // Get tickets url
+            getTicketUrl();
 
           },
           error: function(status) {
-              console.log("Error: " + status);
+
+            console.log("Error: " + status);
+
+            $("#fetch_event").addClass('error');
+
+            $(".error-tip .text").text("Error occurred, please try again.");
+
+            // Display error message
+            $(".error-tip").fadeIn("slow");
+            setTimeout(function(){
+              $(".error-tip").fadeOut("slow");
+            }, 5000);
           }
       });
     }
     else
     {
-        $("#fetch_event").addClass('error');
         console.log("Please Enter a valid Facebook event URL");
+
+        $("#fetch_event").addClass('error');
+
+        $(".error-tip .text").text("Please Enter a valid Facebook event URL");
+
+        // Display error message
+        $(".error-tip").fadeIn("slow");
+        setTimeout(function(){
+          $(".error-tip").fadeOut("slow");
+        }, 5000);
     }
   }
