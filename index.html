@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script src="jquery-1.11.1.min.js"></script>
+	<script src="underscore.js"></script>
+	<script src="parsley.min.js"></script>
 	<script src="event_fetch.js"></script>
 	<link href="index.css" rel="stylesheet"></script>
 </head>
 <body>
+	<div id="fetch">
+		<label> Facebook Event: </label>
+		<input type="text" id="fetch_event" placeholder="Facebook Event Url" required />
+		<input type="button" class="green" onclick="FetchEvent()" value="Fetch Event" />
+	</div>
 
-<div id="fetch">
-	<label> Facebook Event: </label>
-	<input type="text" id="fetch_event" placeholder="Facebook Event Url"></input>
-	<input type="button" class="green" onclick="fetchEvent()" value="Fetch Event"></input>
-</div>
-
-	<form id="fetch_form">
-		<label> Name: </label><input type="text" placeholder="Name" id="name" /><br>
-		<label style="vertical-align: top;"> Description: </label><textarea rows="10" placeholder="Description" id="description"> </textarea><br>
-		<label> Starts Time: </label><input type="text" placeholder="Starts Time" id="start_time" /><br>
-		<label> Location: </label><input type="text" placeholder="Location" id="location" /><br>
+	<form id="fetch_form" data-parsley-validate>
+		<label> Name: </label><input type="text" placeholder="Name" id="name" data-field="name" data-parsley-trigger="keyup" required data-parsley-length="[20, 100]" data-parsley-minlength-message = "Come on! You need to enter at least a 20 caracters long comment.." /><br>
+		<label style="vertical-align: top;"> Description: </label><textarea rows="10" placeholder="Description" id="description" data-field="description"> </textarea><br>
+		<label> Starts Time: </label><input type="text" placeholder="Starts Time" id="start_time" data-field="start_time" /><br>
+		<label> Location: </label><input type="text" placeholder="Location" id="location" data-field="location" /><br>
 		<label> Flyer: </label><img id="cover_img" src="http://www.mountainmansocialmedia.com/_site/wp-content/themes/juiced/img/thumbnail-default.jpg" />
-		<label> Ticket Url: </label><input type="text" id="ticket" placeholder="Ticket Url"><a href="#" id="ticket_url"></a></input>
-		<div class="center"><input type="submit" value="Submit Event" id="submit" class="green"></input</div>
+		<label> Ticket Url: </label><input type="text" id="ticket" placeholder="Ticket Url" data-field="ticket_uri"></input>
+		<div class="center"><input type="submit" value="Submit Event" id="submit" class="green" ></input></div>
+		<span class="error-tip"><label class="text"> Error occurred, please try again.</label></span>
 	</form>
 
 </body>
