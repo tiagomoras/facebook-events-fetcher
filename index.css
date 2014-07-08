@@ -4,7 +4,7 @@ body{
   text-align: center;
 }
 form{
-  width: 40%;
+  width: 700px;
   height: auto;
   margin: 5em auto;
   padding: 1em;
@@ -54,7 +54,7 @@ label{
   text-align: left;
   font-size: 1.2em;
   vertical-align: middle;
-   color: #BBB;
+   color: #727272;
 }
 input[type="text"]{
   width: 65%;
@@ -67,8 +67,9 @@ input[type="text"]{
   color: #868585;
 }
 #fetch{
-  width: 50%;
-  margin: 2em auto -4em auto;
+  position: relative;
+  width: 100%;
+  margin: 2em auto -2em auto;
 }
 #fetch_event{
   width: 40%;
@@ -110,3 +111,24 @@ form label{
 .error::-webkit-input-placeholder{
   color: red;
 }
+.error-tip{
+  display: none;
+  width: auto;
+  margin: 0 auto;
+  position: absolute;
+  top: 1em;
+  background: #FF3D3D;
+  text-align: center;
+  z-index: 1;
+  right: 1em;
+  border-radius: 3px;
+}
+.error-tip .text{
+  width: auto;
+  padding: 1em;
+  font-size: 1.1em;
+  color: #FFF;
+}
+
+
+
